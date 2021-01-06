@@ -1,0 +1,1386 @@
+
+<!doctype html>
+<!--[if IE 8 ]><html lang="en" class="ie8"><![endif]-->
+<!--[if IE 9 ]><html lang="en" class="ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>Home - Future</title>
+<meta name="description" content=Evolutionary Algorithm Network>
+<meta name="keywords" content=EAN>
+<link rel="shortcut icon" href="/favicon.ico" mce_href="/favicon.ico" type="image/x-icon">
+<link title="" href="/static/plugins/layui/css/layui.css" rel="stylesheet">
+<link title="" href="/static/css/future/common.css" rel="stylesheet">
+<link title="" href="/static/css/otc/common.css" rel="stylesheet">
+<link href="/static/css/future/theme.css" rel="stylesheet">
+<link href="/static/css/future/trade.css" rel="stylesheet">
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script type="text/javascript" src="/static/plugins/layui/layui.all.js"></script>
+<script type="text/javascript" src="/static/plugins/lazyload/jquery.lazyload.min.js"></script>
+<script type='text/javascript' src='/static/js/lang/lang.js?v=20210106'></script>
+<script type="text/javascript" src="/static/js/common.js?1111"></script>
+<script type='text/javascript' src='/static/js/common_view.js'></script>
+<script type='text/javascript' src='/static/js/common_websocket.js?v=20210106'></script>
+<script type="text/javascript">
+        window.conf = {
+            "ROOT"      : "",
+            "APP"       : "",
+            "OSS"       : "",
+            "STATIC"    : "/static",
+            "SUFFIX"    : "html",
+            "SMS_VERFY" : "",
+            "PHONE_VERFY" : "",
+            "USER_ID"  : "0",
+            "TIME_TASK"  : "1",
+            "COMMON_WEBSOCKET_URL" : "wss://www.eanex.io/wsotc",
+        };
+        $(function () {
+            WST.initVisitor();
+            WST.initWebSocket();
+        });
+    </script>
+<script type='text/javascript' src='/static/js/socket.io.js?v=20210106'></script>
+
+</head>
+<body>
+<style>
+    .code_wrap img:nth-child(2){
+        display:none;
+    }
+    .themes{
+        height:60px;
+        line-height:58px;
+    }
+</style>
+<div class="header-top">
+<div class='wst-search-container clearfix'>
+<div class='wst-logo fl' style="padding:2px 0;">
+<a href="/home/index/index.html" title="">
+
+<img src="https://coins.eanex.io//upload/sysconfigs/2020-06/5efb27ce2fe8d.png" class="btc_logo" height="30">
+</a>
+</div>
+<div id="wst-nav-items">
+<ul class="nav navbar-nav navbar-left navbar-main-link fl">
+<li>
+<a href="/">Home</a>
+</li>
+<li>
+<a href="/token/index/index.html">Leveraged Tokens</a>
+</li>
+<li class="cur">
+<a href="/future/index/index.html">Futures</a>
+</li>
+<li>
+<a href="/easy/index/index.html">DeFi</a>
+</li>
+<li>
+<a href="/users/index.html">User Center</a>
+</li>
+<li>
+<a href="/cover/catid/1.html">Platform</a>
+</li>
+<li>
+<a href="/cover/catid/2.html">Help centre</a>
+</li>
+</ul>
+</div>
+<div id="navbar-right" class="fr clearfix">
+<ul class="clearfix nav-ul" style="float: left;">
+<li class="fl" style="margin-right: 20px">
+<div class="themes" id="change_themes">
+ <span id="dark"><i class="icon-night"></i></span>
+<span id="default"><i class="icon-daytime"></i></span>
+</div>
+</li>
+
+<li class="btc-login fl">
+<a class="fs-md color_lg" style="cursor: pointer;" href="/login.html">Login</a>
+<a class="fs-md color_rg" href="/register.html" style="cursor: pointer;">Register</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</ul>
+<div class="change-lang">
+<div class="islang color-white"><i class="icon-lang"></i></div>
+<div class="lang-list">
+<dl>
+<dd lang="zh-cn" data-name="changeLang">中文</dd>
+<dd lang="en-us" data-name="changeLang">English</dd>
+<dd lang="ko-kr" data-name="changeLang">한국어</dd>
+<dd lang="ja-jp" data-name="changeLang">日本語</dd>
+<dd lang="vi-vn" data-name="changeLang">Việt Nam</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script type='text/javascript' src='/static/js/qrcode.js'></script>
+<script type="text/javascript">
+	$(function(){
+		$('.j-dorpdown').hover(function () {
+            $(this).find('.j-dorpdown-layer').show();
+        }, function () {
+            $(this).find('.j-dorpdown-layer').hide();
+        });
+        $('.j-dorpdown-layer').hover(function () {
+            $(this).find('.j-dorpdown-layer').show();
+        }, function () {
+            $(this).find('.j-dorpdown-layer').hide();
+        });
+
+		//日期
+		var element = layui.element,
+            form = layui.form;
+            form.render();
+        var msgArr = [];
+        //系统消息的全选
+        form.on('checkbox(navChooesType)', function (data) {
+            var child = $(data.elem).parents('.nav_ifos_box').find('.nav_ifos_mian  ul li input[name="nav_check"]');
+            msgArr = '';
+            child.each(function (index, item) {
+                item.checked = data.elem.checked;
+                if(item.checked == true){
+                    msgArr += item.value+',';
+                }else{
+                    msgArr = '';
+                }
+            });
+            form.render('checkbox');
+        });
+
+        if(localStorage.getItem('lang')) {
+            var langText = localStorage.getItem('lang');
+            if(langText=='zh-cn'){
+                $('.islang').text('中文');
+            }else if(langText == 'en-us'){
+                $('.islang').text('English');
+            }else if(langText == 'ko-kr'){
+                $('.islang').text('한국어');
+            }else  if(langText == 'ja-jp'){
+                $('.islang').text('日本語');
+            }else if(langText == 'vi-vn'){
+                $('.islang').text('Việt Nam');
+            }
+		} else {
+			$('.islang').text('English');
+			
+		}
+
+    });
+    //切换中英文
+    $('body').on('mouseover', '.change-lang', function() {
+        $('.lang-list').show();
+    });
+    $('body').on('mouseleave', '.change-lang', function() {
+        $('.lang-list').hide();
+    });
+    $('body').on('click', '.lang-list dl dd', function() {
+        var that = this;
+        //          $('.islang').find('.textlang').html($(that).text());
+        localStorage.setItem('langSrc', $(that).attr('data-src'));
+        localStorage.setItem('lang', $(that).attr('lang'));
+        var data = {
+            'lang': $(that).attr('lang')
+        };
+        $.get("/home/index/lang.html", data, function() {
+            location.reload();
+        });
+
+    });
+
+    //获取选中的站内信息条数的id
+    function getChk(obj){
+        msgArr = msgArr;
+        var liObj = $(obj).find('input[name="nav_check"]');
+        if(liObj[0].checked == true){
+            msgArr += liObj.val()+',';
+        }
+    }
+    function reads(){
+        if(msgArr == ''){
+            layer.msg('Unchecked message');
+            return false;
+        }
+        $.post('/home/messages/batchRead',{ids:msgArr},function (data) {
+            layer.msg(data.msg);
+            if(data.status == 1){
+                $('.nav_ifos_mian  ul li').each(function() {
+                    if($(this).find('input[name="nav_check"]').is(":checked")){
+                        $(this).remove();
+                    }
+                });
+            }
+        })
+    }
+    //二维码,参数1表示图像大小，取值范围1-10；参数2表示质量，取值范围'L','M','Q','H'
+    var a = qrcode(6, 'M');
+    var url = 'https://www.eanex.io/'+'home/index/download/?request=1';
+    a.addData(url);
+    a.make();
+    $('.download-code').prepend(a.createImgTag());
+    $('.code_wrap').prepend(a.createImgTag());
+</script>
+<div class="sk-main bz">
+<div class="sk-continer clearfix">
+<div class="sk-content bz">
+<div class="trade-wrapper clearfix" id="trade-cont">
+<div class="trade-panel bz fl">
+<div class="chart-wrapper">
+<div class="chart-header bz clearfix">
+<div class="header-left fl wst-f3332 wst-fs-md">
+<img src="/static/img/coin/BTC.png" height="38" width="38" alt="">
+
+<input type="hidden" id="buyAdd" />
+<select id="sel_futures">
+<option data-add="0.00">BTC</option>
+<option data-add="0.00">ETH</option>
+<option data-add="0.00">LTC</option>
+<option data-add="0.00">EOS</option>
+<option data-add="0.00">XRP</option>
+<option data-add="0.00">BCH</option>
+<option data-add="0.00">ETC</option>
+<option data-add="0.00">DASH</option>
+<option data-add="0.00">XMR</option>
+<option data-add="0.00">CVIX</option>
+<option data-add="0.00">ADA</option>
+<option data-add="0.00">XAU</option>
+<option data-add="0.00">XAG</option>
+<option data-add="0.00">DEAN</option>
+<option data-add="0.00">TRX</option>
+</select>
+<span class="latestPrice color-green" id="latestPrice" style="font-size:16px;">35281.71<i class="icon-up"></i>
+</span>
+<span class="today_ratio color-green" id="rose">
++9.03%</span>
+</div>
+<div class="header-right fr">
+<p class="wst-f3332 wst-fs-md">
+<span>Yesterday's closing price <b class="" id="endPrice">32105.17000<i class=""></i></b></span>
+<span style="margin-top:2px;">Today's highest price <b class="" id="highPrice">35716.01</b></span>
+</p>
+<p class="wst-f3332 wst-fs-md" style="margin-left:10px;">
+<span>Opening price today <b class="" id="startPrice">32094.34000</b></span>
+<span style="margin-top: 2px;">Today's lowest price <b class="" id="lowPrice">31784.74000<i class=""></i></b></span>
+</p>
+</div>
+</div>
+
+<div id="chart"></div>
+
+</div>
+</div>
+<div class="trade-book fl">
+<div class="clearfix">
+
+<div class="market-cont c-item fl" id="marketCont">
+<div class="title"><h3 class="cur">Order Book</h3></div>
+<div style="padding: 0 12px;">
+<table>
+<thead>
+<tr>
+<th width="15%" class="wst-align-left">Gear</th>
+<th width="35%" class="wst-align-center">Pricing(USDT)</th>
+<th width="25%" class="wst-align-center">Quantity</th>
+<th width="25%" class="wst-align-right">Total</th>
+</tr>
+</thead>
+</table>
+</div>
+<div class="table" id="marketTable">
+<table>
+<tbody id="sellRows">
+</tbody>
+</table>
+<table>
+<tbody id="buyRows">
+</tbody>
+</table>
+</div>
+</div>
+
+
+ <div class="contract-cont c-item fl" id="contractCont">
+<div class="title clearfix">
+<div class="fl"><h3 class="cur">Futures</h3></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<div class="contract-cont-inner">
+<input type="hidden" id="coin" value="0.1" />
+<input type="hidden" id="builFee" />
+<input type="hidden" id="dayFee" />
+<input type="hidden" id="bail" />
+<input type="hidden" id="per_coin" />
+<div class="tab-a clearfix">
+
+
+</div>
+<div class="tab-c" id="contractTab">
+
+
+
+
+
+
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="clearfix" style="margin-top: 10px;">
+<div class="limit-cont c-item fl" id="limitCont">
+<div class="tab-a title">
+<h3 class="cur tab-item">Market order</h3>
+<h3 class="tab-item" style="margin-left: 15px;">Limit order</h3>
+<h3 class="tab-item binary-option-item" style="margin-left: 15px;">Option</h3>
+</div>
+<div class="tab-c" id="limitTab">
+
+<div class="item tab-cont-item">
+
+<div class="top-text">Balanle:&nbsp;&nbsp;<span class="account_available">0.00</span>&nbsp;<span class="wst-f999">USDT</span>
+</div>
+<div class="form-group clearfix">
+<div class="fl form-group-item clearfix">
+<div class="list">
+<input type="text" class="fl ipt snum" id="J_snum" onkeypress='return WST.isNumberKey(event);' placeholder="0" autocomplete="off" onkeyup="sumFn(this.value);WST.isChinese(this,1);">
+<div class="fr text-label"><span class="wst-f999">BTC</span></div>
+</div>
+</div>
+<div class="fl form-group-item">
+<div class="list">
+<input type="text" class="ipt sloss" onkeyup="javascript:WST.isNumberdote(this,2)" placeholder="Stop price" style="width: 100%;" />
+</div>
+</div>
+</div>
+<div class="form-group clearfix">
+<div class="fl form-group-item clearfix">
+ <div class="list">
+<input type="text" class="fl ipt" onkeyup="javascript:WST.isNumberdote(this,2)" id="J_smax" placeholder="0" disabled="disabled" />
+<div class="fr text-label"><span class="wst-f999">USDT</span>
+
+</div>
+</div>
+</div>
+<div class="fl form-group-item">
+<div class="list">
+<input type="text" class="ipt sprofit" onkeyup="javascript:WST.isNumberdote(this,2)" placeholder="Take profit price" style="width: 100%;" />
+</div>
+</div>
+</div>
+<div class="bottom-text clearfix">
+<div class="list">
+<div class="fl">Commission：<span id="builFeeTotal1">0</span>&nbsp;<span>USDT</span></div>
+<div class="fr">Rollover Swap：<span id="dayFeeTotal1">0</span>&nbsp;<span>USDT</span></div>
+</div>
+</div>
+<div class="clearfix">
+<a class="buy-btn btn fl" href="javascript:;" onclick="orderSubmit(1,2)"><span class="buyPrice"></span>&nbsp;Buy</a>
+<a class="sell-btn btn fl" href="javascript:;" onclick="orderSubmit(2,2)"><span class="sellPrice"></span>&nbsp;Sell</a>
+</div>
+</div>
+
+
+<div class="item tab-cont-item hide">
+<div class="top-text">Balanle:&nbsp;&nbsp;<span class="account_available">0.00</span>&nbsp;<span class="wst-f999">USDT</span>
+</div>
+<div class="form-group clearfix">
+<div class="fl form-group-item clearfix">
+<div class="list">
+<input type="text" class="fl ipt xnum" id="J_xnum" placeholder="0" autocomplete="off" onkeypress='return WST.isNumberKey(event);' onkeyup="numFn(this.value);WST.isChinese(this,1);">
+<div class="fr text-label"><span class="wst-f999">BTC</span></div>
+</div>
+</div>
+<div class="fl form-group-item">
+<div class="list">
+<input type="text" class="ipt xprice" id="J_xprice" onkeyup="xpriceFn(this.value);WST.isNumberdote(this,2)" placeholder="Limit Price" style="width: 100%;" />
+</div>
+</div>
+</div>
+<div class="form-group clearfix">
+<div class="fl form-group-item clearfix">
+<div class="list">
+<input type="text" class="fl ipt" id="J_xmax" onkeyup="javascript:WST.isNumberdote(this,2)" placeholder="0" disabled="disabled" />
+<div class="fr text-label"><span class="wst-f999">USDT</span>
+ 
+</div>
+</div>
+</div>
+<div class="fl form-group-item">
+<div class="clearfix">
+<div class="fl ipt-item">
+<div class="list"><input type="text" class="ipt xprofit" onkeyup="javascript:WST.isNumberdote(this,2)" placeholder="Take profit price" style="width: 100%;" /></div>
+</div>
+<div class="fl ipt-item">
+<div class="list">
+<input type="text" class="ipt xloss" placeholder="Stop price" onkeyup="javascript:WST.isNumberdote(this,2)" style="width: 100%;" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="bottom-text clearfix">
+<div class="list">
+<div class="fl">Commission：<span id="builFeeTotal">0</span>&nbsp;<span>USDT</span></div>
+<div class="fr">Rollover Swap：<span id="dayFeeTotal">0</span>&nbsp;<span>USDT</span></div>
+</div>
+</div>
+<div class="clearfix">
+<a class="buy-btn btn fl" href="javascript:;" onclick="orderSubmit(1,1)"><span style="display: none" class="buyPrice" id="buyPrice1"></span>&nbsp;Buy</a>
+<a class="sell-btn btn fl" href="javascript:;" onclick="orderSubmit(2,1)"><span style="display: none" class="sellPrice"></span>&nbsp;Sell</a>
+</div>
+</div>
+
+
+<div class="item binary-option tab-cont-item hide">
+<div class="top-text">Select expiration time</div>
+<div class="dual-con clearfix">
+<div class="dual-label-item">
+<input type="radio" name="dual" checked id="dual1" value="1">
+<label class="dual-label" for="dual1">
+<span class="dual-time"> 60<i>Second</i></span>
+<span class="dual-profit">PayOut：85 %</span>
+</label>
+</div>
+<div class="dual-label-item">
+<input type="radio" name="dual" id="dual2" value="2">
+<label class="dual-label" for="dual2">
+<span class="dual-time"> 180<i>Second</i></span>
+<span class="dual-profit">PayOut：90 %</span>
+</label>
+</div>
+<div class="dual-label-item">
+<input type="radio" name="dual" id="dual3" value="3">
+ <label class="dual-label" for="dual3">
+<span class="dual-time"> 300<i>Second</i></span>
+<span class="dual-profit">PayOut：95 %</span>
+</label>
+</div>
+</div>
+<div class="form-group w-100 clearfix">
+<div class="form-group-item clearfix">
+<div class="form-group-title">
+Amount (USDT) </div>
+<div class="list dual-input">
+<input type="text" class="ipt numery" onkeypress='return WST.isNumberKey(event);' onkeyup="numFn(this.value),WST.isChinese(this,1);" placeholder="Minimum10">
+</div>
+</div>
+</div>
+<div class="bottom-text clearfix">
+<div class="list">
+<div class="fl">Balance：<span class="binary_available">0</span>&nbsp;<span class="wst-f999">USDT</span></div>
+<div class="fr">Bonus：<span class="bounty">0</span>&nbsp;<span>USDT</span></div>
+</div>
+</div>
+<div class="bottom-text clearfix">
+<div class="list">
+<div class="fl">Tradable Balance：<span class="totalbounty">0</span>&nbsp;<span class="wst-f999">USDT</span></div>
+<div class="fr">Commission：<span id="charge">0</span>&nbsp;<span>USDT</span></div>
+</div>
+</div>
+<div class="clearfix">
+<a class="buy-btn btn fl" href="javascript:;" onclick="orderDual(1);"><span style="display: none" class="buyPrice" id="buyPrice1"></span>Buy</a>
+<a class="sell-btn btn fl" href="javascript:;" onclick="orderDual(0);"><span style="display: none" class="sellPrice"></span>Sell</a>
+</div>
+</div>
+
+</div>
+</div>
+
+<div class="property-cont c-item fl" id="propertyCont">
+<div class="title"><h3 class="cur">Futures Wallet Balance:</h3></div>
+<div class="property-cont-inner" id="propertyTable">
+<div style="text-align: center;height: 40px;line-height: 40px;">No data to show!</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div class="turn-down" id="drap"></div>
+
+
+<div class="panel-bottom" id="panel-tab" style="display: block;">
+<div class="clearfix">
+<div class="panel-tab-tag fl" id="tab_t">
+<div class="stx-btn tab-item1 on tag_0" onclick="holeFn()">Current position</div>
+<div class="stx-btn tab-item1 tag_1" onclick="entrustFn()">Open Orders</div>
+<div class="stx-btn tab-item1 tag_2" onclick="dealFn()">Order History</div>
+<div class="stx-btn tab-item1 tag_3" onclick="historyRegisterFn()">Historical pending order</div>
+<div class="stx-btn tab-item1 tag_4" onclick="assetsFn()">Asset Management</div>
+<div class="stx-btn tab-item1 tag_5" onclick="binaryOption()">Option</div>
+<div class="stx-btn tab-item1 tag_6" onclick="binaryAsset()">Binary wallet</div>
+<div class="stx-btn tab-item1 tag_7" onclick="binaryOptionAll(1)">Options history</div>
+</div>
+<div class="panel-tab-filter fr">
+<div class="panel-tabl-filter-1">
+<select id="holeFn" onchange="holeFn();">
+<option>All</option>
+<option>BUY</option>
+<option>SELL</option>
+</select>
+<div class="stx-btn btn-search item" onclick="allUnwind()">Batch closing</div>
+</div>
+<div class="panel-tabl-filter-1 hide">
+<div class="stx-btn btn-search item" onclick="allRevoke()">Bulk Cancel</div>
+</div>
+<div class="panel-tabl-filter-1 hide">
+<span style="margin-right: 30px;">Contract variety&nbsp;<span class="Varieties">BTC</span></span>
+<span>Latest Price&nbsp;<span class="latestPrice">0</span></span>
+</div>
+<div class="panel-tabl-filter-1 hide">
+
+</div>
+<div class="panel-tabl-filter-1 hide">
+<span style="margin-right: 30px;">Contract variety&nbsp;<span class="Varieties">BTC</span></span>
+<span>Latest Price&nbsp;<span class="latestPrice">0</span></span>
+
+
+
+
+
+
+
+
+
+</div>
+<div class="panel-tabl-filter-1 hide">
+
+</div>
+<div class="panel-tabl-filter-1 hide">
+
+</div>
+<div class="panel-tabl-filter-1 hide">
+
+</div>
+</div>
+</div>
+<div id="tab_c">
+
+<div class="panel-tab-item">
+<div class="stx-current-entrust-head" id="stx-current-head">
+<table cellspacing="0" cellpadding="0" border="0">
+<thead>
+<tr>
+<th width="5%" class="wst-align-left">Contract variety</th>
+<th width="5%">Contract unit</th>
+<th width="6%">Margin_Rate</th>
+
+<th width="6%">Volume</th>
+<th width="8%">Occupation margin (USDT)</th>
+<th width="7%">Fee (USDT)</th>
+ <th width="7%">Deferred fee (USDT)</th>
+<th width="8%">Floating profit and loss（USDT）</th>
+<th width="8%">Position profit and loss（USDT）</th>
+<th width="6%">Opening price</th>
+<th width="6%">Position price</th>
+<th width="5%">Stop Style</th>
+<th width="5%">stop limit</th>
+<th width="4%">Side</th>
+<th width="10%">Open Time</th>
+<th style="text-align: right;">Actions</th>
+</tr>
+</thead>
+<tbody id="holeTable">
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div class="panel-tab-item hide">
+<div class="stx-current-entrust-head">
+<table cellspacing="0" cellpadding="0" border="0">
+<thead>
+<tr>
+<th width="15%" class="wst-align-left">Pending order number</th>
+<th width="10%">Contract variety</th>
+<th width="10%">Contract unit</th>
+<th width="10%">Order Price</th>
+<th width="9%">Volume</th>
+<th width="12%">Freeze Margin(USDT)</th>
+<th width="10%">Stop Style</th>
+<th width="10%">stop limit</th>
+<th width="6%">Side</th>
+<th style="text-align: right;">Actions</th>
+</tr>
+</thead>
+<tbody id="entrustTable">
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div class="panel-tab-item hide">
+<div id="form">
+<form class="form-search" name="form-search">
+<div class="group-form-item clearfix">
+<div class="fl">
+<span>Currency contract&nbsp;</span>
+<select id="dealFn" class="hostory_search">
+<option>BTC</option>
+<option>ETH</option>
+<option>LTC</option>
+<option>EOS</option>
+<option>XRP</option>
+<option>BCH</option>
+<option>ETC</option>
+<option>DASH</option>
+<option>XMR</option>
+<option>CVIX</option>
+<option>ADA</option>
+<option>XAU</option>
+<option>XAG</option>
+<option>DEAN</option>
+<option>TRX</option>
+</select>
+</div>
+<div class="item clearfix" style="margin-left: 30px;">
+<span>Closing start and end date&nbsp;</span>
+<input type="text" name="startTime" id="startTime" class="input laydate-icon" placeholder="Start time" />
+<span>&nbsp;-&nbsp;</span>
+<input type="text" name="endTime" id="endTime" class="input laydate-icon" placeholder="End time" />
+</div>
+<div class="stx-btn btn-search item" onclick="dealFn()">Search</div>
+</div>
+</form>
+</div>
+<div class="stx-current-entrust-head" style="padding-top: 3px;">
+<table cellspacing="0" cellpadding="0" border="0">
+<thead>
+<tr>
+<th width="7%" class="wst-align-left">Contract variety</th>
+<th width="7%">Contract unit</th>
+<th width="7%">Side</th>
+<th width="7%">Opening price</th>
+<th width="10%">Open Time</th>
+<th width="7%">Closing price</th>
+<th width="10%">Close Time</th>
+<th width="7%">Volume</th>
+<th width="7%">Opening fee</th>
+<th width="7%">Closing fee</th>
+<th width="7%">Rollover Swap</th>
+<th width="7%">Floating profit and loss</th>
+<th width="7%">Total profit and loss</th>
+<th style="text-align: right;">Actions</th>
+</tr>
+</thead>
+<tbody id="dealTable" style="height: 86px !important;">
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div class="panel-tab-item hide">
+<div class="stx-current-entrust-head">
+<table cellspacing="0" cellpadding="0" border="0">
+<thead>
+<tr>
+<th width="15%" class="wst-align-left">Pending order number</th>
+<th width="8%">Contract variety</th>
+<th width="8%">Contract unit</th>
+<th width="8%">Order Price</th>
+<th width="8%">Volume</th>
+<th width="10%">Freeze Margin(USDT)</th>
+<th width="10%">Stop Style</th>
+<th width="8%">stop limit</th>
+<th width="8%">Side</th>
+<th width="10%">Order Type</th>
+<th style="text-align: right;">Actions</th>
+</tr>
+</thead>
+<tbody id="historyRegisterTable">
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div class="panel-tab-item hide">
+<div class="stx-current-entrust-head">
+<table cellspacing="0" cellpadding="0" border="0">
+<thead>
+<tr>
+<th width="16%" class="wst-align-left">Balance</th>
+<th width="16%">Current funds</th>
+<th width="16%">Current profit and loss</th>
+<th width="16%">Available</th>
+<th width="16%">Used</th>
+<th width="10%">Freeze</th>
+<th style="text-align: right;">Actions</th>
+</tr>
+</thead>
+<tbody id="assetsTable">
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div class="panel-tab-item hide">
+<div class="stx-current-entrust-head">
+<table cellspacing="0" cellpadding="0" border="0">
+<thead>
+<tr>
+<th width="11%" class="wst-align-left">Variety</th>
+<th width="11%">Time</th>
+<th width="11%">Buying direction</th>
+<th width="11%">Amount (USDT)</th>
+<th width="11%">Buying price</th>
+<th width="11%">Current price</th>
+<th width="11%">Delivery time</th>
+<th width="11%">Expected Income</th>
+<th width="11%">Closing countdown</th>
+</tr>
+</thead>
+<tbody id="binaryTable">
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div class="panel-tab-item hide">
+<div class="stx-current-entrust-head">
+<table cellspacing="0" cellpadding="0" border="0">
+<thead>
+<tr>
+<th width="16%" class="wst-align-left">Balance</th>
+<th width="16%">Current funds</th>
+<th width="16%">Total profit and loss</th>
+<th width="16%">Balance</th>
+<th width="16%">Bonus</th>
+<th width="16%">Tradable Balance</th>
+<th width="16%">Freeze</th>
+<th width="16%">Operation</th>
+</tr>
+</thead>
+<tbody id="binaryAsset">
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div class="panel-tab-item hide">
+<div id="form-dual">
+<form class="form-search" name="form-search">
+<div class="group-form-item clearfix">
+<div class="fl">
+<span>Currency contract&nbsp;</span>
+<select id="dealFn-dual" class="hostory_search">
+<option value="1">BTC</option>
+<option value="2">ETH</option>
+<option value="3">LTC</option>
+<option value="4">EOS</option>
+<option value="5">XRP</option>
+<option value="6">BCH</option>
+<option value="7">ETC</option>
+<option value="8">DASH</option>
+<option value="9">XMR</option>
+<option value="10">CVIX</option>
+<option value="12">ADA</option>
+<option value="13">XAU</option>
+<option value="18">XAG</option>
+<option value="19">DEAN</option>
+<option value="20">TRX</option>
+</select>
+</div>
+<div class="item clearfix" style="margin-left: 30px;">
+<span>Order time&nbsp;</span>
+<input type="text" name="startTime" id="dual-startTime" class="input laydate-icon" placeholder="Start time" />
+<span>&nbsp;-&nbsp;</span>
+<input type="text" name="endTime" id="dual-endTime" class="input laydate-icon" placeholder="End time" />
+</div>
+<div class="stx-btn btn-search item" onclick="binaryOptionAll(0)">Search</div>
+</div>
+</form>
+</div>
+<div class="stx-current-entrust-head" style="padding-top: 3px">
+<table cellspacing="0" cellpadding="0" border="0">
+<thead>
+<tr>
+<th width="10%" class="wst-align-left">Variety</th>
+<th width="10%">Order time</th>
+<th width="10%">Buying direction</th>
+<th width="10%">Amount (USDT)</th>
+<th width="10%">Buying price</th>
+<th width="10%">Selling price</th>
+<th width="10%">Delivery time</th>
+<th width="10%">Profit and loss</th>
+<th width="10%">Pay out</th>
+<th width="10%">Selling time</th>
+</tr>
+</thead>
+<tbody id="binaryTableAll" style="height: 86px !important;">
+</tbody>
+</table>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<div id="editCont" style="display: none;">
+<div class="edit-cont">
+<div class="clearfix item">
+<div class="fl color">Contract Trading</div>
+<div class="fr editCont-fu_name"></div>
+</div>
+<div class="clearfix item">
+<div class="fl color">Volume</div>
+<div class="fr editCont-num"></div>
+</div>
+<div class="clearfix item">
+<div class="fl color">Margin</div>
+<div class="fr editCont-bail_fee"></div>
+</div>
+<div class="clearfix item">
+<div class="fl color">Service Charge</div>
+<div class="fr editCont-fee"></div>
+</div>
+<div class="clearfix item">
+<div class="color fl">Rollover Swap</div>
+<div class="fr">
+<span class="editCont-day_fee"></span>
+</div>
+</div>
+<div class="clearfix item">
+<label class="color lbl">
+<input type="checkbox" id="check1" style="vertical-align: middle;">Stop Style </label>
+</div>
+<div class="clearfix item">
+<div class="fl color">Stop Loss</div>
+<div class="fr"><input type="text" onkeyup="javascript:WST.isNumberdote(this,2)" class="ipt" id="loss3" value="0" disabled="disabled" /></div>
+</div>
+<div class="clearfix item" style="display:none;">
+<div class="fl color">点数</div>
+<div class="fr"><input type="number" class="ipt" id="loss4" value="0" disabled="disabled" /></div>
+</div>
+<div class="clearfix item">
+<label class="color lbl">
+<input type="checkbox" id="check2" style="vertical-align: middle;">stop limit </label>
+</div>
+<div class="clearfix item">
+<div class="fl color">Take Profit</div>
+<div class="fr"><input type="text" onkeyup="javascript:WST.isNumberdote(this,2)" class="ipt" id="profit3" value="0" disabled="disabled" /></div>
+</div>
+<div class="clearfix item" style="display:none;">
+<div class="fl color">点数</div>
+<div class="fr"><input type="number" class="ipt" id="profit4" value="0" disabled="disabled" /></div>
+</div>
+</div>
+</div>
+
+<div id="editCont1" style="display: none;">
+<div class="edit-cont">
+<div class="clearfix item">
+<div class="fl color">Contract Trading</div>
+<div class="fr editCont1-fu_name">BTC</div>
+</div>
+<div class="clearfix item">
+<div class="fl color">Price</div>
+<div class="fr"><input type="text" onkeyup="javascript:WST.isNumberdote(this,2)" class="ipt" id="price" /></div>
+</div>
+<div class="clearfix item">
+<div class="fl color">Volume</div>
+<div class="fr editCont1-num">0.00</div>
+</div>
+<div class="clearfix item">
+<div class="fl color">Margin(USDT)</div>
+<div class="fr editCont1-bail_fee">0</div>
+</div>
+<div class="clearfix item">
+<div class="fl color">Service Charge</div>
+<div class="fr editCont1-fee">0&nbsp;USDT</div>
+</div>
+<div class="clearfix item">
+<div class="color fl">Rollover Swap</div>
+<div class="fr">
+<span class="editCont1-day_fee"></span>
+</div>
+</div>
+<div class="clearfix item">
+<label class="color lbl">
+<input type="checkbox" id="check3" style="vertical-align: middle;">Stop Style </label>
+</div>
+<div class="clearfix item">
+<div class="fl color">Stop Loss</div>
+<div class="fr"><input type="text" onkeyup="javascript:WST.isNumberdote(this,2)" class="ipt" id="loss5" disabled="disabled" /></div>
+</div>
+<div class="clearfix item" style="display:none;">
+<div class="fl color">点数</div>
+<div class="fr"><input type="number" class="ipt" id="loss6" value="0" disabled="disabled" /></div>
+</div>
+<div class="clearfix item">
+<label class="color lbl">
+<input type="checkbox" id="check4" style="vertical-align: middle;">stop limit </label>
+</div>
+<div class="clearfix item">
+<div class="fl color">Take Profit</div>
+<div class="fr"><input type="text" onkeyup="javascript:WST.isNumberdote(this,2)" class="ipt" id="profit5" disabled="disabled" /></div>
+</div>
+<div class="clearfix item" style="display:none;">
+<div class="fl color">点数</div>
+<div class="fr"><input type="number" class="ipt" id="profit6" value="0" disabled="disabled" /></div>
+</div>
+</div>
+</div>
+
+<div id="history-make" style="display: none;">
+<div class="history-make">
+<div class="form-group-item"><label>Order Number：</label><span id="history-ordersn"></span></div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-4"><label>Variety：</label><span id="history-fu_name"></span></div>
+<div class="fl form-xs-4"><label>Contract Type：</label><span id="history-contType"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-4"><label>Opening price：</label><span id="history-price"></span></div>
+<div class="fl form-xs-4"><label>Closing price：</label><span id="history-deal_price"></span></div>
+<div class="fl form-xs-4"><label>Side：</label><span id="history-type"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-4"><label>Volume：</label><span id="history-num"></span></div>
+<div class="fl form-xs-4"><label>Margin amount：</label><span id="history-bail_fee"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-4"><label>Opening fee：</label><span id="history-build_fee"></span></div>
+<div class="fl form-xs-4"><label>Closing fee：</label><span id="history-deal_fee"></span></div>
+<div class="fl form-xs-4"><label>Rollover Swap：</label><span id="history-day_fee"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-4"><label>Floating profit and loss：</label><span id="history-float_profit" style="color: #DBAC28;"></span></div>
+<div class="fl form-xs-4"><label>Total profit and loss：</label><span id="history-real_profit" style="color: #DBAC28;"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-6"><label>Open Time：</label><span id="history-create_time"></span></div>
+<div class="fl form-xs-6"><label>Close Time：</label><span id="history-deal_time"></span></div>
+</div>
+</div>
+</div>
+
+<div id="history-putup" style="display: none;">
+<div class="history-make">
+<div class="form-group-item clearfix">
+<div class="fl form-xs-6"><label>Order Number：</label><span id="putup-ordersn"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-6"><label>Order Type：</label><span id="putup-status"></span></div>
+<div class="fl form-xs-6"><label>Variety：</label><span id="putup-fuName"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-6"><label>Order Price：</label><span id="putup-price"></span></div>
+<div class="fl form-xs-6"><label>Contract Type：</label><span id="putup-contType"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-6"><label>Volume：</label><span id="putup-num"></span></div>
+<div class="fl form-xs-6"><label>Side：</label><span id="putup-type"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-6"><label>Service Charge：</label><span id="putup-fee"></span></div>
+<div class="fl form-xs-6"><label>Margin amount：</label><span id="putup-bailNum"></span></div>
+</div>
+<div class="form-group-item clearfix">
+<div class="fl form-xs-6"><label>Creation time：</label><span id="putup-createTime"></span></div>
+<div class="fl form-xs-6"><label>Completion time：</label><span id="putup-dealTime"></span></div>
+</div>
+</div>
+</div>
+
+<div id="transfer" style="display:none;">
+<div class="transfer">
+<div class="transfer_info clearfix">
+<div class="fl">&nbsp;&nbsp;从&nbsp;&nbsp;</div>
+<div class="fl transfer_label" id="a"><span id="transfer_label1" data-id="1">Wallet account</span></div>
+<div class="fl">
+<div style="text-align: center;"><i class="icon_transfer" id="changeStyle"></i></div>
+<div style="text-align: center;margin-top: -5px;">Transfer to</div>
+</div>
+<div class="transfer_label" id="b"><span id="transfer_label2">Contract account</span>
+</div>
+</div>
+<div class="transfer_tab">
+<div class="tab_c">
+<div class="tab_input">
+<div class="ustransfer"><span class="coin" style="color: #959EC6;font-size: 16px;">USDT</span>&nbsp;&nbsp;Transferable<span id="max">8.00</span>&nbsp;<span id="nowFuName" class="coin">USDT</span></div>
+<div class="transfer_inner clearfix">
+<input type="text" id="transfer_input" class="transfer_input fl" onkeyup="javascript:WST.isNumberdote(this,2)" placeholder="Please fill in the transfer amount" />
+<span class="fr"><span class="nowFuName coin">USDT</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="getAll" style="cursor: pointer;">All</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="transfer-dual" style="display:none;">
+<div class="transfer">
+<div class="transfer_info clearfix">
+<div class="fl">&nbsp;&nbsp;From&nbsp;&nbsp;</div>
+<div class="fl transfer_label" id="dual-a"><span id="dual-transfer_label1" data-id="1">Wallet account</span></div>
+<div class="fl">
+<div style="text-align: center;"><i class="icon_transfer" id="dual-changeStyle"></i></div>
+<div style="text-align: center;margin-top: -5px;">Transfer to</div>
+</div>
+<div class="transfer_label" id="dual-b"><span id="dual-transfer_label2">Binary account</span>
+</div>
+</div>
+<div class="transfer_tab">
+<div class="tab_c">
+<div class="tab_input">
+<div class="ustransfer"><span class="coin binaryCoin" style="font-size: 16px;">USDT</span>&nbsp;&nbsp;Transferable<span id="dual-max">8.00</span>&nbsp;<span id="ndual-owFuName" class="coin">USDT</span></div>
+<div class="transfer_inner clearfix">
+<input type="text" id="dual-transfer_input" class="transfer_input fl" onkeyup="javascript:WST.isNumberdote(this,2)" placeholder="Please fill in the transfer amount" />
+<span class="fr"><span class="nowFuName coin">USDT</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span id="dual-getAll" style="cursor: pointer;">All</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div id="fullStop" style="display: none;">
+<div class="full-stop">
+<div class="tab-t clearfix">
+<div class="fl cur tab-item2" data-id="0">Stop Style</div>
+<div class="fl tab-item2" data-id="1">stop limit</div>
+</div>
+<div class="tab-c">
+<div class="tabCon_0">
+<div class="item">
+<label>Stop Loss</label>
+<input type="text" onkeyup="javascript:WST.isNumberdote(this,2)" id="loss" value="0" />
+</div>
+<div class="item" style="display:none;">
+<label>点数</label>
+<input type="number" id="loss2" value="0" />
+</div>
+</div>
+<div class="tabCon_1 hide">
+<div class="item">
+<label>Take Profit</label>
+<input type="text" onkeyup="javascript:WST.isNumberdote(this,2)" id="profit" value="0" />
+</div>
+<div class="item" style="display:none;">
+<label>点数</label>
+<input type="number" id="profit2" value="0" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<input type="hidden" value="" id="fu_name" name="fu_name">
+<script type="text/javascript">
+    var sid="9859";
+    var pid="1";//产品id
+    var binaryTime=null;//二元定时器
+    var globalLottery={};//开奖订单号
+    var binaryBuy="10";//二元最少购入手数
+    var decimal="2";//保留小数位数
+    var color_class = 'wst-green2';
+    var color_cl = 'wst-green2';
+    var startPrice_du = 0;
+</script>
+<script type="text/javascript" src="/static/plugins/Jquerycookie/jquery.cookie.js"></script>
+<script type="text/javascript" src="/charting_library-master/charting_library/charting_library.min.js"></script>
+<script type="text/javascript" src="/charting_library-master/datafeeds/udf/dist/bundle.js"></script>
+<script type="text/javascript" src="/charting_library-master/datafeeds/udf/dist/polyfills.js"></script>
+<script type='text/javascript' src='/templates/future/view/index/order.js?v=20210106111'></script>
+<script type='text/javascript' src='/templates/future/view/index/trade.js?v=202101061111'></script>
+<script type="text/javascript">
+    var ser = 0.005;
+    $(document).ready(function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#startTime',
+            type: 'datetime',
+            format: 'yyyy-MM-dd HH:mm:ss'
+        });
+        laydate.render({
+            elem: '#endTime',
+            type: 'datetime',
+            format: 'yyyy-MM-dd HH:mm:ss'
+        });
+        laydate.render({
+            elem: '#dual-startTime',
+            type: 'datetime',
+            format: 'yyyy-MM-dd HH:mm:ss'
+        });
+        laydate.render({
+            elem: '#dual-endTime',
+            type: 'datetime',
+            format: 'yyyy-MM-dd HH:mm:ss'
+        });
+
+        if (sessionStorage.getItem('style')) {
+            if (sessionStorage.getItem('style') == 'Light') {
+                $(document.body).addClass('Light');
+                bgColor = '#fafafa';
+                hColor = '#eee';
+                vColor = '#eee';
+                color = '#666';
+                upColor = '#01B1A7';
+                downColor = '#f75467';
+            } else {
+                $(document.body).addClass('dark');
+                bgColor = '#030D2D';
+                hColor = 'rgba(41, 46, 79, 0.1)';
+                vColor = 'rgba(41, 46, 79, 0.1)';
+                color = '#959EC6';
+                upColor = '#01b1a7';
+                downColor = '#f75467';
+            }
+        } else {
+            $(document.body).addClass('dark');
+            bgColor = '#030D2D';
+            hColor = '#222';
+            vColor = '#222';
+            color = '#959EC6';
+            upColor = '#01b1a7';
+            downColor = '#f75467';
+            sessionStorage.setItem('style', 'dark');
+        }
+        var daytime = document.getElementById('dark'),
+            night = document.getElementById('default');
+        daytime.addEventListener('click', function () {
+            $(document.body).removeClass('Light').addClass('dark');
+            sessionStorage.setItem('style', 'dark');
+            $('#dark').hide();
+            $('#default').show();
+            bgColor = '#030D2D';
+            hColor = 'rgba(41, 46, 79, 0.1)';
+            vColor = 'rgba(41, 46, 79, 0.1)';
+            color = '#959EC6';
+            upColor = '#01b1a7';
+            downColor = '#f75467';
+            $('iframe')[0].contentWindow.init();
+            widget.applyOverrides({
+                "paneProperties.background": bgColor,
+                "paneProperties.horzGridProperties.color": hColor,
+                "paneProperties.vertGridProperties.color": vColor,
+                "scalesProperties.textColor": color,
+                "mainSeriesProperties.candleStyle.upColor": upColor,
+                "mainSeriesProperties.candleStyle.downColor": downColor,
+            });
+            widget.applyStudiesOverrides({
+                "volume.volume.color.0": upColor,
+                "volume.volume.color.1": downColor,
+            });
+        });
+
+        night.addEventListener('click', function () {
+            $(document.body).removeClass('dark').addClass('Light');
+            sessionStorage.setItem('style', 'Light');
+            $('#default').hide();
+            $('#dark').show();
+            bgColor = '#fafafa';
+            hColor = '#eee';
+            vColor = '#eee';
+            color = '#666';
+            upColor = '#01B1A7';
+            downColor = '#f75467';
+            $('iframe')[0].contentWindow.init();
+            widget.applyOverrides({
+                "paneProperties.background": bgColor,
+                "paneProperties.horzGridProperties.color": hColor,
+                "paneProperties.vertGridProperties.color": vColor,
+                "scalesProperties.textColor": color,
+                "mainSeriesProperties.candleStyle.upColor": upColor,
+                "mainSeriesProperties.candleStyle.downColor": downColor,
+            });
+            widget.applyStudiesOverrides({
+                "volume.volume.color.0": upColor,
+                "volume.volume.color.1": downColor
+            });
+        });
+        resizeScreen();
+        drapScreen();//拖动改变窗口高度
+    });
+    var bgColor = '#030D2D',
+        hColor = 'rgba(41, 46, 79, 0.1)',
+        vColor = 'rgba(41, 46, 79, 0.1)',
+        color = '#eee',
+        upColor = '#01B1A7',
+        downColor = '#f75467';
+    $(function () {
+        var url_fu_name = getParameterByName('fu_name');
+        if (url_fu_name !== '') {
+            $('#sel_futures').val(url_fu_name); // 选中合约币种
+        }
+        //
+        var wsUrl = "wss://www.eanex.io/wsfuture";
+        var fu_name = $('#sel_futures').val();
+        var future_name = "BTC_USDT";
+        // 切换合约币种
+        $('#buyAdd').val($('#sel_futures option:selected').attr('data-add'));
+        $('#sel_futures').on('change', function(){
+            $('#buyAdd').val($('#sel_futures option:selected').attr('data-add'));
+            window.location.href = WST.U('future/index/index') + '?fu_name=' + $('#sel_futures').val();
+
+        });
+        $('#fu_name').val(fu_name);
+        var price = Number($('#latestPrice').text());
+        var buyAdd = Number($('#buyAdd').val());
+        $('.buyPrice').text((price + buyAdd).toFixed(2));
+        $('.sellPrice').text((price - buyAdd).toFixed(2));
+        //初始化该交易市场的推送
+        socketPush(fu_name, wsUrl);
+        //K线图点击
+        // changePeroid(fu_name,timeType);
+        initPrice(future_name); // 初始化行情报价数据
+        initFutureLever(fu_name); // 初始化合约杠杆数据
+        $('.Varieties').text($("#sel_futures  option:selected").text());
+        $('.latestPrice').text("35281.71");
+        holeFn();  //当前持仓
+        entrustFn(); //挂单委托
+        dealFn();//历史成交
+        historyRegisterFn();//历史挂单
+        assetsFn();//资产管理
+
+
+    });
+    function drapScreen(){
+        var src_posi_Y = 0, dest_posi_Y = 0, move_Y = 0, is_mouse_down = false, destHeight = 200;
+        $("#drap").mousedown(function(e){
+            src_posi_Y = e.pageY;
+            is_mouse_down = true;
+        });
+        $(document).bind("click mouseup",function(e){
+            if(is_mouse_down){
+                is_mouse_down = false;
+            }
+        })
+            .mousemove(function(e){
+                dest_posi_Y = e.pageY;
+                move_Y = src_posi_Y - dest_posi_Y;
+                src_posi_Y = dest_posi_Y;
+                destHeight = $("#panel-tab").height() + move_Y;
+                if(is_mouse_down && destHeight<360){
+                    resizeScreen();
+                    //判断destHeight是否大于200
+                    if(document.body.clientWidth>1366){
+                        $(".panel-bottom").css("height", destHeight > 230 ? destHeight : 230);
+                    }else{
+                        $(".panel-bottom").css("height", destHeight > 200 ? destHeight : 200);
+                    }
+
+                }
+            });
+    }
+    function resizeScreen() {
+        var tradeCont = document.getElementById('trade-cont');
+        var chart = document.getElementById('chart');
+        var marketCont = document.getElementById('marketCont');
+        var contractCont = document.getElementById('contractCont');
+        var limitCont = document.getElementById('limitCont');
+        var propertyCont = document.getElementById('propertyCont');
+        var contractTab = document.getElementById('contractTab');
+        var marketTable = document.getElementById('marketTable');
+        var propertyTable = document.getElementById('propertyTable');
+        var limitTab = document.getElementById('limitTab');
+        tradeCont.style.height = $('body').height() - $('.header-top').height() - $('.panel-bottom').height()-10 + 'px';
+        chart.style.height = $('body').height() - $('.header-top').height() - $('.panel-bottom').height() - $('.chart-header').height()-20+ 'px';
+        marketCont.style.height = ($('body').height() - $('.header-top').height() - $('.panel-bottom').height()) / 2 - 10 + 'px';
+        contractCont.style.height = ($('body').height() - $('.header-top').height() - $('.panel-bottom').height()) / 2 - 10 + 'px';
+        limitCont.style.height = ($('body').height() - $('.header-top').height() - $('.panel-bottom').height()) / 2 + 11 + 'px';
+        propertyCont.style.height = ($('body').height() - $('.header-top').height() - $('.panel-bottom').height()) / 2 + 11 + 'px';
+
+        contractTab.style.height = ($('body').height() - $('.header-top').height() - $('.panel-bottom').height()) / 2 - 110 + 'px';
+        marketTable.style.height = ($('body').height() - $('.header-top').height() - $('.panel-bottom').height()) / 2 - 110 + 'px';
+        propertyTable.style.height = ($('body').height() - $('.header-top').height() - $('.panel-bottom').height()) / 2 - 81 + 'px';
+        limitTab.style.height = ($('body').height() - $('.header-top').height() - $('.panel-bottom').height()) / 2 - 80 + 'px';
+
+        var windowWidth = $(window).width();
+        var clientW = document.body.clientWidth/2;
+        if(windowWidth<1479) {
+            $('.trade-wrapper .trade-panel').css({'width':clientW+60+'px'});
+            $('.trade-wrapper .trade-book').css({'width':clientW-60+'px',left:clientW+60+'px'});
+        }else {
+            $('.trade-wrapper .trade-panel').css({'width':'58%'});
+            $('.trade-wrapper .trade-book').css({'width':'42%',left:'58%'});
+        }
+    }
+
+    window.addEventListener("resize", resizeScreen);
+
+</script>
+</body>
+</html>
